@@ -1,0 +1,18 @@
+<dataConfig>
+   <dataSource type="JdbcDataSource" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://ezcac-integration-mysql.cncmk5ndlbjo.us-east-1.rds.amazonaws.com:3306/coreServiceDB" user="webadmin_user" password="cac@ezdi2014" />
+   <document>
+      <entity name="encounter_data" query="select distinct patientFirstName, patientLastName, CONCAT(patientFirstName ,' ' ,patientLastName) as patientName, mrn, patientClass, facilityId, tenantId, 
+encounterId , status, CONCAT('[ENCOUNTER]_','[',tenantId,']_','[',facilityId,']_','[',encounterId,']') As solr_id from  encounterInfo where isActive = 1">
+         <field column="solr_id" name="id" />
+         <field column="encounterId" name="entity_id" />
+         <field column="tenantId" name="tenant_id" />
+         <field column="patientFirstName" name="patient_first_name" />
+         <field column="patientLastName" name="patient_last_name" />
+         <field column="mrn" name="mrn" />
+         <field column="patientName" name="patient_name" />
+         <field column="patientClass" name="patient_class" />
+         <field column="facilityId" name="facility_id" />
+	 <field column="status" name="status" />
+      </entity>
+   </document>
+</dataConfig>

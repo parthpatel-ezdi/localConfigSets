@@ -1,0 +1,22 @@
+<dataConfig>
+<dataSource type="JdbcDataSource" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://ezcac-integration-mysql.cncmk5ndlbjo.us-east-1.rds.amazonaws.com:3306/CAC_WEB_ADMIN" user="webadmin_user" password="cac@ezdi2014" />
+   <document>
+      <entity name="Admin_Financial_Class" query="select distinct description,id as entity_id, fin_class_code,facility_id, CONCAT('[ADMIN_FINANCIAL_CLASS]_','[1]_[',facility_id,']_','[',id,']') As solr_id , CONCAT(fin_class_code,' - ',description) As detail from  financial_class_facility_map where is_active = 1">
+         <field column="solr_id" name="id" />
+         <field column="entity_id" name="entity_id" />
+         <field column="description" name="financial_class_desc" />
+         <field column="fin_class_code" name="financial_class_code" />
+	 <field column="detail" name="financial_class_dtl" />
+	 <field column="facility_id" name="facility_id" />
+      </entity>
+      <entity name="Admin_Grouper" query="select distinct  grouper_type,grouper_version,facility_id,id as entity_id, CONCAT('[ADMIN_GROUPER]_','[1]_[',facility_id,']_','[',id,']') As solr_id,
+CONCAT(grouper_type,' - ',grouper_version) As detail from grouping_sources_default where is_active = 1">
+         <field column="solr_id" name="id" />
+         <field column="entity_id" name="entity_id" />
+         <field column="grouper_type" name="grouper_type" />
+         <field column="facility_id" name="facility_id" />
+         <field column="detail" name="grouper_dtl" />
+         <field column="grouper_version" name="grouper_version" />
+      </entity>
+   </document>
+</dataConfig>
